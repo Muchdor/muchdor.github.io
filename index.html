@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
+    <title>Profil Pribadi - Achmad Muchdor Firdaus</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            margin-bottom: 30px;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-image-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+        }
+
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .image-upload-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .profile-image-container:hover .image-upload-overlay {
+            opacity: 1;
+        }
+
+        .upload-icon {
+            color: white;
+            font-size: 24px;
+        }
+
+        #imageUpload {
+            display: none;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .edit-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .edit-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            animation: slideInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+
+        .section h2 {
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-size: 2em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+            border-radius: 1px;
+        }
+
+        .section h2 i {
+            font-size: 0.8em;
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-item:hover::before {
+            left: 100%;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .education-item, .interest-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .education-item:hover, .interest-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+        }
+
+        .education-item h3 {
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .education-item p {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin: 3% auto;
+            padding: 35px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        .close {
+            color: #666;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            color: #333;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            color: #333;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .interest-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .interest-card:hover::before {
+            left: 100%;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .interest-card i {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .interest-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .interest-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .profile-card {
+                margin-bottom: 20px;
+                border-radius: 20px;
+            }
+            
+            .header {
+                padding: 30px 15px;
+            }
+            
+            .profile-image-container,
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .profile-image {
+                font-size: 50px;
+                margin-bottom: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+                margin-bottom: 8px;
+            }
+            
+            .header p {
+                font-size: 1.1em;
+            }
+            
+            .edit-btn {
+                top: 15px;
+                right: 15px;
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+            
+            .content {
+                padding: 25px 20px;
+            }
+            
+            .section {
+                margin-bottom: 40px;
+            }
+            
+            .section h2 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            
+            .skill-item {
+                padding: 15px 10px;
+                font-size: 14px;
+            }
+            
+            .education-item {
+                padding: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .interests-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .interest-card {
+                padding: 25px 20px;
+            }
+            
+            .interest-card i {
+                font-size: 3em;
+                margin-bottom: 15px;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            
+            .social-link {
+                justify-content: center;
+                padding: 18px 25px;
+                font-size: 16px;
+            }
+            
+            .modal-content {
+                margin: 5% 10px;
+                padding: 25px;
+                width: calc(100% - 20px);
+                max-height: 90vh;
+                border-radius: 15px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+            
+            .header {
+                padding: 25px 10px;
+            }
+            
+            .profile-image-container,
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .profile-image {
+                font-size: 40px;
+            }
+            
+            .header h1 {
+                font-size: 1.7em;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <div class="header">
+                <!-- <button class="edit-btn" onclick="openModal()">
+                    <i class="fas fa-edit"></i> Edit Profil
+                </button> -->
+                <div class="profile-image-container">
+                    <div class="profile-image" onclick="document.getElementById('imageUpload').click()">
+                        <i class="fas fa-user" id="defaultIcon"></i>
+                        <img id="profileImg" style="display: none;" />
+                    </div>
+                    <div class="image-upload-overlay">
+                        <i class="fas fa-camera upload-icon"></i>
+                    </div>
+                    <input type="file" id="imageUpload" accept="image/*" onchange="handleImageUpload(event)">
+                </div>
+                <h1 id="displayName">Achmad Muchdor Firdaus</h1>
+                <p id="displayTitle">Data and Machine Learning Enthusiast</p>
+            </div>
+
+            <div class="content">
+                <!-- Tentang Saya -->
+                <div class="section">
+                    <h2><i class="fas fa-user-circle"></i> Tentang Saya</h2>
+                    <p id="displayAbout">Saya adalah seorang Lulusan Ilmu Komputer dengan passion dalam mengubah data menjadi insight yang bermakna. Siap berkontribusi dalam transformasi digital perusahaan. Berpengalaman dalam Machine Learning, Data Analysis, dan System Design dengan pendekatan user-center yang mampu bekerja sama dengan tim.</p>
+                </div>
+
+                <!-- Keahlian -->
+                <div class="section">
+                    <h2><i class="fas fa-code"></i> Keahlian</h2>
+                    <div class="skills-grid" id="skillsGrid">
+                        <div class="skill-item">HTML/CSS</div>
+                        <div class="skill-item">JavaScript</div>
+                        <div class="skill-item">Python</div>
+                        <div class="skill-item">Microsoft Office/Excel</div>
+                        <div class="skill-item">Adobe Premiere</div>
+                    </div>
+                </div>
+
+                <!-- Pendidikan -->
+                <div class="section">
+                    <h2><i class="fas fa-graduation-cap"></i> Pendidikan</h2>
+                    <div id="educationList">
+                        <div class="education-item">
+                            <h3>S1 Informatika</h3>
+                            <p><strong>Universitas Jember</strong></p>
+                            <p>2018 - 2025</p>
+                            <p>IPK: 3.46</p>
+                        </div>
+                        <div class="education-item">
+                            <h3>SMA Negeri Balung</h3>
+                            <p><strong>Jurusan IPA</strong></p>
+                            <p>2015 - 2018</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Minat & Ketertarikan -->
+                <div class="section">
+                    <h2><i class="fas fa-heart"></i> Minat & Ketertarikan</h2>
+                    <div class="interests-grid" id="interestsGrid">
+                        <div class="interest-card">
+                            <i class="fas fa-laptop-code"></i>
+                            <h3>Programming</h3>
+                            <p>Mengembangkan model deep learning dan di data analyst</p>
+                        </div>
+                        <div class="interest-card">
+                            <i class="fas fa-palette"></i>
+                            <h3>Design</h3>
+                            <p>UI Design dan Graphic Design</p>
+                        </div>
+                        <div class="interest-card">
+                            <i class="fas fa-camera"></i>
+                            <h3>Fotografi</h3>
+                            <p>Mengabadikan momen indah</p>
+                        </div>
+                        <div class="interest-card">
+                            <i class="fas fa-book"></i>
+                            <h3>Membaca</h3>
+                            <p>Buku teknologi dan pengembangan diri</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Media Sosial -->
+                <div class="section">
+                    <h2><i class="fas fa-share-alt"></i> Media Sosial</h2>
+                    <div class="social-links" id="socialLinks">
+                        <a href="https://linkedin.com/in/johndoe" class="social-link" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/johndoe" class="social-link" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://instagram.com/johndoe" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                        <a href="mailto:john@example.com" class="social-link">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Edit Profil</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="name">Nama Lengkap:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">Profesi/Posisi:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="about">Tentang Saya:</label>
+                    <textarea id="about" name="about" rows="4" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="skills">Keahlian (pisahkan dengan koma):</label>
+                    <textarea id="skills" name="skills" rows="3" placeholder="HTML/CSS, JavaScript, Python, Microsoft Office/Excel"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="education">Pendidikan (JSON format):</label>
+                    <textarea id="education" name="education" rows="6" placeholder='[{"degree":"S1 Informatika","school":"Universitas Jember","period":"2018-2025","gpa":"3.46"}]'></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="interests">Minat (JSON format):</label>
+                    <textarea id="interests" name="interests" rows="6" placeholder='[{"title":"Programming","icon":"fas fa-laptop-code","description":"Mengembangkan model deep learning dan data analyst"}]'></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="social">Media Sosial (JSON format):</label>
+                    <textarea id="social" name="social" rows="6" placeholder='[{"name":"LinkedIn","url":"https://linkedin.com//in/johndoe","icon":"fab fa-linkedin"},{"name":"GitHub","url":"https://github.com/johndoe","icon":"fab fa-github"}]'></textarea>
+                </div>
+                
+                <button type="button" class="btn" onclick="saveProfile()">Simpan Perubahan</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Data profil yang bisa dimodifikasi langsung di kode
+        const profileData = {
+            name: "Achmad Muchdor Firdaus",
+            title: "Data and Machine Learning Enthusiast",
+            about: "Saya adalah seorang Lulusan Ilmu Komputer dengan passion dalam mengubah data menjadi insight yang bermakna. Siap berkontribusi dalam transformasi digital perusahaan. Berpengalaman dalam Machine Learning, Data Analysis, dan System Design dengan pendekatan user-center yang mampu bekerja sama dengan tim.",
+            skills: ["HTML/CSS", "JavaScript", "Python", "Microsoft Office/Excel", "Adobe Premiere"],
+            education: [
+                {
+                    degree: "S1 Informatika",
+                    school: "Universitas Jember",
+                    period: "2018 - 2025",
+                    gpa: "3.46"
+                },
+                {
+                    degree: "SMA Negeri Balung",
+                    school: "Jurusan IPA",
+                    period: "2015 - 2018"
+                }
+            ],
+            interests: [
+                {
+                    title: "Programming",
+                    icon: "fas fa-laptop-code",
+                    description: "Mengembangkan model deep learning dan di data analyst"
+                },
+                {
+                    title: "Design",
+                    icon: "fas fa-palette",
+                    description: "UI Design dan Graphic Design"
+                },
+                {
+                    title: "Fotografi",
+                    icon: "fas fa-camera",
+                    description: "Mengabadikan momen indah"
+                },
+                {
+                    title: "Membaca",
+                    icon: "fas fa-book",
+                    description: "Buku teknologi dan pengembangan diri"
+                }
+            ],
+            social: [
+                {
+                    name: "LinkedIn",
+                    url: "https://linkedin.com/in/johndoe",
+                    icon: "fab fa-linkedin"
+                },
+                {
+                    name: "GitHub",
+                    url: "https://github.com/johndoe",
+                    icon: "fab fa-github"
+                },
+                {
+                    name: "Instagram",
+                    url: "https://instagram.com/johndoe",
+                    icon: "fab fa-instagram"
+                },
+                {
+                    name: "Email",
+                    url: "mailto:john@example.com",
+                    icon: "fas fa-envelope"
+                }
+            ]
+        };
+
+        // Fungsi untuk memuat data profil
+        function loadProfile() {
+            // Cek apakah ada data di localStorage
+            const savedProfile = localStorage.getItem('profileData');
+            const savedImage = localStorage.getItem('profileImage');
+            
+            // Gunakan data yang disimpan atau data default
+            const data = savedProfile ? JSON.parse(savedProfile) : profileData;
+            
+            // Isi form dengan data
+            document.getElementById('displayName').textContent = data.name;
+            document.getElementById('displayTitle').textContent = data.title;
+            document.getElementById('displayAbout').textContent = data.about;
+            
+            // Isi skills
+            const skillsGrid = document.getElementById('skillsGrid');
+            skillsGrid.innerHTML = '';
+            data.skills.forEach(skill => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.textContent = skill;
+                skillsGrid.appendChild(skillItem);
+            });
+            
+            // Isi pendidikan
+            const educationList = document.getElementById('educationList');
+            educationList.innerHTML = '';
+            data.education.forEach(edu => {
+                const eduItem = document.createElement('div');
+                eduItem.className = 'education-item';
+                
+                let html = `<h3>${edu.degree}</h3>`;
+                html += `<p><strong>${edu.school}</strong></p>`;
+                html += `<p>${edu.period}</p>`;
+                if (edu.gpa) html += `<p>IPK: ${edu.gpa}</p>`;
+                
+                eduItem.innerHTML = html;
+                educationList.appendChild(eduItem);
+            });
+            
+            // Isi minat
+            const interestsGrid = document.getElementById('interestsGrid');
+            interestsGrid.innerHTML = '';
+            data.interests.forEach(interest => {
+                const interestCard = document.createElement('div');
+                interestCard.className = 'interest-card';
+                
+                let html = `<i class="${interest.icon}"></i>`;
+                html += `<h3>${interest.title}</h3>`;
+                html += `<p>${interest.description}</p>`;
+                
+                interestCard.innerHTML = html;
+                interestsGrid.appendChild(interestCard);
+            });
+            
+            // Isi media sosial
+            const socialLinks = document.getElementById('socialLinks');
+            socialLinks.innerHTML = '';
+            data.social.forEach(social => {
+                const socialLink = document.createElement('a');
+                socialLink.className = 'social-link';
+                socialLink.href = social.url;
+                socialLink.target = '_blank';
+                
+                let html = `<i class="${social.icon}"></i> ${social.name}`;
+                socialLink.innerHTML = html;
+                socialLinks.appendChild(socialLink);
+            });
+            
+            // Isi gambar profil jika ada
+            if (savedImage) {
+                const profileImg = document.getElementById('profileImg');
+                profileImg.src = savedImage;
+                profileImg.style.display = 'block';
+                document.getElementById('defaultIcon').style.display = 'none';
+            }
+        }
+        
+        // Fungsi untuk menangani upload gambar
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const profileImg = document.getElementById('profileImg');
+                    profileImg.src = e.target.result;
+                    profileImg.style.display = 'block';
+                    document.getElementById('defaultIcon').style.display = 'none';
+                    
+                    // Simpan ke localStorage
+                    localStorage.setItem('profileImage', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // Fungsi untuk membuka modal edit
+        function openModal() {
+            const modal = document.getElementById('editModal');
+            modal.style.display = 'block';
+            
+            // Isi form dengan data saat ini
+            const savedProfile = localStorage.getItem('profileData');
+            const data = savedProfile ? JSON.parse(savedProfile) : profileData;
+            
+            document.getElementById('name').value = data.name;
+            document.getElementById('title').value = data.title;
+            document.getElementById('about').value = data.about;
+            document.getElementById('skills').value = data.skills.join(', ');
+            document.getElementById('education').value = JSON.stringify(data.education, null, 2);
+            document.getElementById('interests').value = JSON.stringify(data.interests, null, 2);
+            document.getElementById('social').value = JSON.stringify(data.social, null, 2);
+        }
+        
+        // Fungsi untuk menutup modal edit
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+        
+        // Fungsi untuk menyimpan profil
+        function saveProfile() {
+            const newData = {
+                name: document.getElementById('name').value,
+                title: document.getElementById('title').value,
+                about: document.getElementById('about').value,
+                skills: document.getElementById('skills').value.split(',').map(skill => skill.trim()),
+                education: JSON.parse(document.getElementById('education').value),
+                interests: JSON.parse(document.getElementById('interests').value),
+                social: JSON.parse(document.getElementById('social').value)
+            };
+            
+            // Simpan ke localStorage
+            localStorage.setItem('profileData', JSON.stringify(newData));
+            
+            // Muat ulang profil
+            loadProfile();
+            
+            // Tutup modal
+            closeModal();
+        }
+        
+        // Muat profil saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', loadProfile);
+        
+        // Tutup modal jika klik di luar konten modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
